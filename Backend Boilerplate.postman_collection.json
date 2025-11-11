@@ -1,0 +1,1366 @@
+{
+	"info": {
+		"_postman_id": "4c449b95-bfa9-4312-875d-01e705eb35fa",
+		"name": "Backend Boilerplate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37296943"
+	},
+	"item": [
+		{
+			"name": "General",
+			"item": [
+				{
+					"name": "Account",
+					"item": [
+						{
+							"name": "Create User",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\":\"{{$randomFirstName}}\",\r\n    \"lastname\":\"{{$randomLastName}}\",\r\n    \"email\": \"user@yopmail.com\",\r\n    \"password\":\"test@123\",\r\n    \"confirm_password\":\"test@123\",\r\n    \"device_type\":\"android\",\r\n    \"device_token\":\"123123123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/user",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify OTP ( Register Screen )",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"user@yopmail.com\",\r\n    \"otp\":\"176833\",\r\n    \"device_type\":\"web\",\r\n    \"device_token\":\"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/user/verify-otp/register",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"verify-otp",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify OTP ( Forgot Password Screen)",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "d022611f-6c8a-4e72-a19b-e55da5b64c64",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"user@yopmail.com\",\r\n    \"otp\":\"120924\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/user/verify-otp/forgot-password",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"verify-otp",
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Parse the JSON response\r",
+											"var jsonResponse = pm.response.json();\r",
+											"\r",
+											"// Extract the data you want from the response\r",
+											"var token = jsonResponse.data.api_token;\r",
+											"\r",
+											"// Set the environment variable\r",
+											"pm.environment.set(\"api_token\", token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"user@yopmail.com\",\r\n    \"password\":\"test@123\",\r\n    \"device_type\":\"ios\",\r\n    \"device_token\":\"123123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/user/login",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send OTP",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "d022611f-6c8a-4e72-a19b-e55da5b64c64",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "token",
+										"value": "68bdbd1c-a197-4d78-9483-3f8f292a42be",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"user@yopmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/user/send-otp/mail",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"send-otp",
+										"mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Set New Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SjFjMlZ5WDJsa0lqbzRMQ0pwWVhRaU9qRTNNamcxTkRRM05EUXNJbVY0Y0NJNk1UY3lPRGszTmpjME5Dd2lhWE56SWpvaWJXbDVjV2RuZFdOdWJXaHBhbmRzWW5kbGIyRnVkV053YkhaNGJXVjZZM0VpTENKemRXSWlPaUp0YVhseFoyZDFZMjV0YUdscWQyeGlkMlZ2WVc1MVkzQnNkbmh0WlhwamNTSXNJbXAwYVNJNkluVnpaWEl0T0NKOS55dFVnSURwV21lOWhxZ1RoMzR2dDViSnFPcjYyc1V2bTl6eWFWclB3VWVJ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"new_password\":\"test@123\",\r\n    \"confirm_password\":\"test@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/user/set-password",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"set-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Social Login",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "d022611f-6c8a-4e72-a19b-e55da5b64c64",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "token",
+										"value": "68bdbd1c-a197-4d78-9483-3f8f292a42be",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"test\",\r\n    \"email\":\"socialuser@yopmail.com\",\r\n    \"device_type\":\"web\",\r\n    \"device_token\":\"123\",\r\n    \"platform_type\":\"google\",\r\n    \"platform_id\":\"123123123\"\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/user/social-login",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"social-login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "firstname",
+											"value": "John",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "Elbert",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}api/user",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"current_password\":\"test@123\",\r\n    \"new_password\":\"Test@123\",\r\n    \"confirm_password\":\"Test@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/user/change-password",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Account",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}api/user",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}api/user/logout",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get My Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}api/user",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Toggle Notification",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}api/user/toggle-notification",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"toggle-notification"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Device Token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"device_type\": \"ios\",\r\n    \"device_token\": \"ABC 12334\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/user/update-device-token",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"update-device-token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Pages",
+					"item": [
+						{
+							"name": "Get All",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}api/user/page",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"page"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by Slug",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}api/user/page/privacy-policy",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"page",
+										"privacy-policy"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Setting",
+					"item": [
+						{
+							"name": "Get Settings",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}api/user/setting",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"setting"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Upload Attachment",
+					"item": [
+						{
+							"name": "Upload Attachment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/faaiz.hassan/Desktop/user-placeholder.jpeg"
+										},
+										{
+											"key": "path",
+											"value": "user",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}api/user/upload-attachments",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"upload-attachments"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Notifications",
+					"item": [
+						{
+							"name": "Get All",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}api/user/notifications",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"notifications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Unread Count",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}api/user/get-unread-count",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"get-unread-count"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark All Read",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}api/user/mark-all-read",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"mark-all-read"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark Single Read",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}api/user/mark-single-read/22",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"user",
+										"mark-single-read",
+										"22"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpiSFZuSWpvaVl6aGlNVE0zWVdZdE9UZG1aaTAwWW1KaExUZzROVGN0TXpFeU16VTJZVE5rWXpjM0lpd2lhV0YwSWpveE56STBNak00TURRMUxDSmxlSEFpT2pFM01qUTROREk0TkRVc0ltbHpjeUk2SWpJMk1EUmtabU14TFdJNE1HWXROREprTmkwNE1EWTRMVFF4WVRnd05UTXlaV0UxTnlJc0luTjFZaUk2SWpJMk1EUmtabU14TFdJNE1HWXROREprTmkwNE1EWTRMVFF4WVRnd05UTXlaV0UxTnlJc0ltcDBhU0k2SW1NNFlqRXpOMkZtTFRrM1ptWXROR0ppWVMwNE9EVTNMVE14TWpNMU5tRXpaR00zTnlKOS54R1k4UHJDeFVnMXozRkg2bURfQl85Y3NxSVRzRE9Dd2pVRHZSaXljakJV",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Account",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Parse the JSON response\r",
+											"var jsonResponse = pm.response.json();\r",
+											"\r",
+											"// Extract the data you want from the response\r",
+											"var token = jsonResponse.data.api_token;\r",
+											"\r",
+											"// Set the environment variable\r",
+											"pm.environment.set(\"api_token\", token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"admin@yopmail.com\",\r\n    \"password\":\"test@123\",\r\n    \"device_type\":\"web\",\r\n    \"device_token\":\"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/admin/login",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Forgot Password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"admin@yopmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/admin/forgot-password",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"current_password\":\"test@123\",\r\n    \"new_password\":\"test@1234\",\r\n    \"confirm_password\":\"test@1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/admin/change-password",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Profile",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image_url",
+											"type": "file",
+											"src": "/C:/Users/anas.akhtar/Downloads/download (2).jpg",
+											"disabled": true
+										},
+										{
+											"key": "firstname",
+											"value": "Super",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "Admin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}api/admin",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"vaa@yopmail.com\",\r\n    \"password\":\"test@1234\",\r\n    \"device_type\":\"web\",\r\n    \"device_token\":\"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/admin/logout",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get My Profile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}api/admin",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Lookup",
+					"item": [
+						{
+							"name": "Get All Lookups",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}api/admin/lookup",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"lookup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Data In Lookups",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/admin/lookup/:id",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"lookup",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "ddd46319-9163-4dd2-ae60-557e6784e770"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Pages",
+					"item": [
+						{
+							"name": "Add Page",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Terms And Conditions\",\r\n    \"content\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\r\n    \"url\": \"https://trangotech.com/privacy-policy-terms-of-service/\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/admin/page",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"page"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Pages",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}api/admin/page",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"page"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Single Page",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}api/admin/page/2",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"page",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Page",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Terms And Conditions\",\r\n    \"content\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}api/admin/page/4",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"page",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Page",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{api_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}api/admin/page/4",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"admin",
+										"page",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpiSFZuSWpvaVpUZG1NVGN4TWpNdFlqYzJNUzAwTldJd0xXSmlNMkl0TkRrd1pHUTBNV1kwTldVeUlpd2lhV0YwSWpveE56STBNakUyTkRjMUxDSmxlSEFpT2pFM01qUTRNakV5TnpVc0ltbHpjeUk2SWpGbE5HRmtOR0ptTFdRMlptVXROR1JpTnkwNE4yVXhMV00zT0dJMk9ETTBZVGRoTlNJc0luTjFZaUk2SWpGbE5HRmtOR0ptTFdRMlptVXROR1JpTnkwNE4yVXhMV00zT0dJMk9ETTBZVGRoTlNJc0ltcDBhU0k2SW1VM1pqRTNNVEl6TFdJM05qRXRORFZpTUMxaVlqTmlMVFE1TUdSa05ERm1ORFZsTWlKOS5NOEg1dVJyUjJkNlphaEF4UVJvYU13SV9CSmNLQVR6cXdtN3N4cmN6U0t3",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "token",
+			"value": "miyqggucnmhijwlbweoanucplvxmezcq",
+			"type": "string"
+		},
+		{
+			"key": "base_url",
+			"value": "http://fatash.trangotechdevs.com:3035/",
+			"type": "string"
+		},
+		{
+			"key": "api_token",
+			"value": ""
+		}
+	]
+}
